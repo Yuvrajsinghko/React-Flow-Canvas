@@ -1,3 +1,4 @@
+import Canvas from "../canvas/Canvas";
 import LeftRail from "./LeftRail";
 import TopBar from "./TopBar";
 
@@ -10,7 +11,7 @@ const DashboardLayout = () => {
     <LeftRail />
 
     <main className="flex-1">
-      Canvas Area
+      <Canvas/>
     </main>
 
     <aside className="hidden w-64 border-l lg:block">
