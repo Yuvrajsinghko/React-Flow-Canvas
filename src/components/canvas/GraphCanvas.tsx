@@ -9,6 +9,8 @@ import {
 } from "@xyflow/react";
 
 import "@xyflow/react/dist/style.css";
+import { useAppStore } from "@/store/useAppStore";
+import { useEffect } from "react";
 
 const initialNodes: Node[] = [
   {
@@ -42,8 +44,38 @@ const initialEdges: Edge[] = [
 ];
 
 const GraphCanvas = () => {
-  const [nodes, , onNodesChange] = useNodesState(initialNodes);
-  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const setSelectedNodeId = useAppStore((state) => state.setSelectedNodeId);
+
+  const selectedNodeId = useAppStore((state) => state.selectedNodeId);
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (
+        (event.key === "Delete" || event.key === "Backspace") &&
+        selectedNodeId
+      ) {
+        setNodes((currentNodes) =>
+          currentNodes.filter((node) => node.id !== selectedNodeId),
+        );
+
+        setEdges((currentEdges) =>
+          currentEdges.filter(
+            (edge) =>
+              edge.source !== selectedNodeId && edge.target !== selectedNodeId,
+          ),
+        );
+
+        setSelectedNodeId(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [selectedNodeId, setNodes, setEdges, setSelectedNodeId]);
 
   return (
     <ReactFlow
@@ -53,10 +85,12 @@ const GraphCanvas = () => {
       onEdgesChange={onEdgesChange}
       fitView
       className="text-zinc-950"
-      onNodeClick={(_, node) => console.log("node selected", node.id)}
+      onNodeClick={(_, node) => setSelectedNodeId(node.id)}
       onNodeDragStart={(_, node) => console.debug("node drag start", node)}
       onNodeDrag={(_, node) => console.debug("node dragging", node.position)}
-      onNodeDragStop={(_, node) => console.debug("node drag stop", node.position)}
+      onNodeDragStop={(_, node) =>
+        console.debug("node drag stop", node.position)
+      }
     >
       <Background variant={BackgroundVariant.Dots} />
     </ReactFlow>
