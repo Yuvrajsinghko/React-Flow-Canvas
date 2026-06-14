@@ -10,7 +10,7 @@ const DashboardLayout = () => {
   <div className="flex h-[calc(100vh-64px)]">
     <LeftRail />
 
-    <main className="flex-1">
+    <main className="flex-1 overflow-hidden">
       <Canvas/>
     </main>
 
