@@ -53,7 +53,7 @@ const GraphCanvas = () => {
       onEdgesChange={onEdgesChange}
       fitView
       className="text-zinc-950"
-      onNodeClick={(_, node) => console.debug("node selected", node)}
+      onNodeClick={(_, node) => console.log("node selected", node.id)}
       onNodeDragStart={(_, node) => console.debug("node drag start", node)}
       onNodeDrag={(_, node) => console.debug("node dragging", node.position)}
       onNodeDragStop={(_, node) => console.debug("node drag stop", node.position)}
