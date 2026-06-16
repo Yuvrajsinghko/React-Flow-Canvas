@@ -1,3 +1,4 @@
+import AppsList from "../app-panel/AppList";
 import Canvas from "../canvas/Canvas";
 import LeftRail from "./LeftRail";
 import TopBar from "./TopBar";
@@ -15,7 +16,7 @@ const DashboardLayout = () => {
     </main>
 
     <aside className="hidden w-64 border-l lg:block">
-      Right Panel
+      <AppsList />
     </aside>
   </div>
 </div>

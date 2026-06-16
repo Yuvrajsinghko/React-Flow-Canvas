@@ -3,6 +3,8 @@ import { create } from "zustand";
 type AppStore = {
   selectedNodeId: string | null;
   setSelectedNodeId: (nodeId: string | null) => void;
+  selectedAppId: string | null;
+  setSelectedAppId: (appId: string) => void;
 };
 
 export const useAppStore = create<AppStore>((set) => ({
@@ -11,5 +13,12 @@ export const useAppStore = create<AppStore>((set) => ({
   setSelectedNodeId: (nodeId) =>
     set({
       selectedNodeId: nodeId,
+    }),
+
+  selectedAppId: "payments",
+
+  setSelectedAppId: (appId) =>
+    set({
+      selectedAppId: appId,
     }),
 }));
