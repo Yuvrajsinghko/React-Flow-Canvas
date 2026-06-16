@@ -7,7 +7,7 @@ import {
   type Edge,
   type Node,
 } from "@xyflow/react";
-
+import { useGraph } from "@/hooks/useGraph";
 import "@xyflow/react/dist/style.css";
 import { useAppStore } from "@/store/useAppStore";
 import { useEffect } from "react";
@@ -49,6 +49,9 @@ const GraphCanvas = () => {
   const setSelectedNodeId = useAppStore((state) => state.setSelectedNodeId);
 
   const selectedNodeId = useAppStore((state) => state.selectedNodeId);
+  const selectedAppId = useAppStore((state) => state.selectedAppId);
+
+  const { data, isLoading, error } = useGraph(selectedAppId);
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (
@@ -76,7 +79,27 @@ const GraphCanvas = () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [selectedNodeId, setNodes, setEdges, setSelectedNodeId]);
+  useEffect(() => {
+    if (!data) return;
 
+    setNodes(data.nodes as Node[]);
+    setEdges(data.edges as Edge[]);
+  }, [data, setNodes, setEdges]);
+  if (isLoading) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        Loading graph...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-full items-center justify-center">
+        Failed to load graph
+      </div>
+    );
+  }
   return (
     <ReactFlow
       nodes={nodes}
