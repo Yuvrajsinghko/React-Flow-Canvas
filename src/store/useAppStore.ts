@@ -5,6 +5,8 @@ type AppStore = {
   setSelectedNodeId: (nodeId: string | null) => void;
   selectedAppId: string | null;
   setSelectedAppId: (appId: string) => void;
+  activeInspectorTab: string;
+  setActiveInspectorTab: (tab: string) => void;
 };
 
 export const useAppStore = create<AppStore>((set) => ({
@@ -20,5 +22,11 @@ export const useAppStore = create<AppStore>((set) => ({
   setSelectedAppId: (appId) =>
     set({
       selectedAppId: appId,
+    }),
+  activeInspectorTab: "config",
+
+  setActiveInspectorTab: (tab) =>
+    set({
+      activeInspectorTab: tab,
     }),
 }));
