@@ -1,7 +1,14 @@
 import { useApps } from "@/hooks/useApps";
 import { useAppStore } from "@/store/useAppStore";
 import NodeInspector from "./NodeInspector";
-export default function AppsList() {
+import type { AppNode } from "../layout/DashboardLayout";
+
+type AppsListProps = {
+  nodes: AppNode[];
+  setNodes: React.Dispatch<React.SetStateAction<AppNode[]>>;
+};
+
+export default function AppsList({ nodes, setNodes }: AppsListProps) {
   const { data, isLoading, error } = useApps();
 
   const selectedAppId = useAppStore((state) => state.selectedAppId);
@@ -37,7 +44,7 @@ export default function AppsList() {
         </div>
       </div>
 
-      <NodeInspector />
+      <NodeInspector nodes={nodes} setNodes={setNodes} />
     </div>
   );
 }

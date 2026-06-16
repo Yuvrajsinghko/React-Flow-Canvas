@@ -17,6 +17,8 @@ export const graphs = {
         position: { x: 100, y: 100 },
         data: {
           label: "API Service",
+          weight: 50,
+          status: "Healthy",
         },
       },
       {
@@ -24,6 +26,8 @@ export const graphs = {
         position: { x: 450, y: 100 },
         data: {
           label: "Postgres",
+          weight: 50,
+          status: "Healthy",
         },
       },
       {
@@ -31,6 +35,8 @@ export const graphs = {
         position: { x: 275, y: 280 },
         data: {
           label: "Redis",
+          weight: 50,
+          status: "Healthy",
         },
       },
     ],
@@ -56,6 +62,8 @@ export const graphs = {
         position: { x: 100, y: 100 },
         data: {
           label: "Collector",
+          weight: 50,
+          status: "Healthy",
         },
       },
       {
@@ -63,6 +71,8 @@ export const graphs = {
         position: { x: 400, y: 200 },
         data: {
           label: "Warehouse",
+          weight: 50,
+          status: "Healthy",
         },
       },
     ],
