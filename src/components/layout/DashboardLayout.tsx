@@ -1,6 +1,7 @@
 import AppsList from "../app-panel/AppList";
 import Canvas from "../canvas/Canvas";
 import LeftRail from "./LeftRail";
+import MobilePanel from "../app-panel/MobilePanel";
 import TopBar from "./TopBar";
 import { useEffect } from "react";
 import { useEdgesState, useNodesState, type Edge, type Node } from "@xyflow/react";
@@ -65,11 +66,12 @@ const DashboardLayout = () => {
   return (
     <div className="h-screen bg-black text-white">
   <TopBar />
+  <MobilePanel nodes={nodes} setNodes={setNodes} />
 
   <div className="flex h-[calc(100vh-64px)]">
     <LeftRail />
 
-    <main className="flex-1 overflow-hidden">
+    <main className="min-w-0 flex-1 overflow-hidden">
       <Canvas
         nodes={nodes}
         edges={edges}

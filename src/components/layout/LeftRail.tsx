@@ -3,7 +3,7 @@ import { Home, Database, Settings } from "lucide-react";
 const items = [Home, Database, Settings];
 const LeftRail = () => {
   return (
-    <aside className="w-16 border-r border-zinc-800 bg-zinc-950">
+    <aside className="hidden w-16 border-r border-zinc-800 bg-zinc-950 md:block">
       <div className="flex h-full flex-col items-center gap-4 py-4">
         {items.map((Icon, idx) => (
           <button

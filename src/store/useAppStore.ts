@@ -7,6 +7,8 @@ type AppStore = {
   setSelectedAppId: (appId: string) => void;
   activeInspectorTab: string;
   setActiveInspectorTab: (tab: string) => void;
+  isMobilePanelOpen: boolean;
+  setIsMobilePanelOpen: (open: boolean) => void;
 };
 
 export const useAppStore = create<AppStore>((set) => ({
@@ -28,5 +30,11 @@ export const useAppStore = create<AppStore>((set) => ({
   setActiveInspectorTab: (tab) =>
     set({
       activeInspectorTab: tab,
+    }),
+  isMobilePanelOpen: false,
+
+  setIsMobilePanelOpen: (open) =>
+    set({
+      isMobilePanelOpen: open,
     }),
 }));
